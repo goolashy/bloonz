@@ -26,6 +26,7 @@ const init = () => {
     timer = 5
     timerEl.innerHTML = timer
     bloonz = []
+    endGameEl.style.display = "flex"
 }
 
 const resizeCanvas = () => {
@@ -164,6 +165,7 @@ const stopTimer = () => {
 }
 
 startEl.addEventListener("click", () => {
+    endGameEl.style.display = "none"
     start()
 })
 let x = document.querySelector("#x")
