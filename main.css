@@ -35,23 +35,26 @@ body {
     font-weight: bold;
     color: white;
     letter-spacing: 1px;
+    max-width: 25vw;
+    margin-bottom: 5vh;
 }
 #startBtn:hover {
     cursor: pointer;
 }
 
 #endGame {
-    overflow: hidden;
     position: absolute;
-    width: 50%;
-    height: 60%;
+    min-width: 50%;
+    min-height: 30%;
     margin-top: -30vh;
     margin-left: -25vw;
     top: 50%;
     left: 50%;
-    flex-flow: column;
-
-    background-color: red;
+    flex-direction: column;
+    justify-content: stretch;
+    background-color: white;
+    border: 1px solid black;
+    align-items: center;
 }
 
 #scoreEl,
@@ -64,4 +67,9 @@ canvas {
     border-width: 1px;
     background-color: rgb(187, 187, 187);
     opacity: 70%;
+}
+
+h1,
+p {
+    margin: 0;
 }

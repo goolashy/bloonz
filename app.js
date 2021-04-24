@@ -21,7 +21,7 @@ const init = () => {
     blnSize = window.innerHeight * 0.05
     counterSize = window.innerHeight * 0.3
     onTheRun = false
-    score = 0
+
     scoreEl.innerHTML = score
     timer = 5
     timerEl.innerHTML = timer
@@ -116,6 +116,7 @@ function animate() {
 const start = () => {
     if (!onTheRun) {
         onTheRun = true
+        score = 0
         countdown()
     }
 }
@@ -123,7 +124,8 @@ const stop = () => {
     cancelAnimationFrame(animationId)
     clear()
     stopTimer()
-    init()
+    //init()
+    endGameEl.style.display = "flex"
 }
 
 const countdown = () => {
