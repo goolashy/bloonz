@@ -2,14 +2,18 @@ const canvas = document.querySelector("canvas")
 const ctx = canvas.getContext("2d")
 const randomX = (blnSize) => Math.random() * (canvas.width - 2 * blnSize) + blnSize
 const randomY = (blnSize) => Math.random() * (canvas.height - 2 * blnSize) + blnSize
-const scoreEl = document.querySelector("#scoreEl")
+const highscoreEl = document.querySelector("#highscoreEl")
 const timerEl = document.querySelector("#timerEl")
 const startEl = document.querySelector("#startBtn")
+const menuEl = document.querySelector("#menuEl")
+const scoreEl = document.querySelector("#scoreEl")
+const resultEl = document.querySelector("#resultEl")
 let bloonz = []
-let blnSize = window.innerHeight * 0.075
-let color = "rgb(255,179,186)"
+let blnSize = window.innerHeight * 0.07
+let blnColor = "#cc3b3b"
 let animationId = null
 let score = 0
+let highscore = 0
 let timer = 5
 let intervalTimer = null
 let counterSize = window.innerHeight * 0.3
@@ -18,32 +22,22 @@ let onTheRun = false
 const init = () => {
     canvas.width = window.innerHeight
     canvas.height = window.innerHeight
-    blnSize = window.innerHeight * 0.05
+    blnSize = window.innerHeight * 0.07
     counterSize = window.innerHeight * 0.3
     onTheRun = false
-
-    scoreEl.innerHTML = score
+    score = 0
     timer = 5
-    timerEl.innerHTML = timer
     bloonz = []
-    endGameEl.style.display = "flex"
+    timerEl.innerHTML = timer
+    menuEl.style.display = "flex"
 }
-
-const resizeCanvas = () => {
-    cancelAnimationFrame(animationId)
-    init()
-    clear()
-    stopTimer()
-}
-
-addEventListener("resize", resizeCanvas, false)
 
 class Balloon {
     constructor() {
         this.blnSize = blnSize
         this.x = randomX(blnSize)
         this.y = randomY(blnSize)
-        this.color = color
+        this.color = blnColor
         this.clicked = false
     }
 
@@ -67,14 +61,16 @@ const addBalloon = () => {
     redraw()
 }
 
-const clear = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-}
 const redraw = () => {
-    clear()
+    clearCanv()
     bloonz.forEach((balloon) => balloon.draw())
 }
 
+const clearCanv = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
+
+//popping bloon
 canvas.addEventListener("click", function (event) {
     let x = event.offsetX,
         y = event.offsetY
@@ -93,6 +89,7 @@ canvas.addEventListener("click", function (event) {
     })
 })
 
+//after hit
 const removeBalloon = (arr) => {
     arr.forEach((ball, index) => {
         if (ball.clicked == true) {
@@ -101,6 +98,7 @@ const removeBalloon = (arr) => {
     })
 }
 
+//prevent bloon from spawning on other bloon
 const collisionCheck = (ball, newBall) => {
     const distance = Math.hypot(ball.x - newBall.x, ball.y - newBall.y)
     if (distance <= ball.blnSize + newBall.blnSize && distance != 0) {
@@ -117,16 +115,20 @@ const start = () => {
     if (!onTheRun) {
         onTheRun = true
         score = 0
+        menuEl.style.display = "none"
         countdown()
     }
 }
 const stop = () => {
     cancelAnimationFrame(animationId)
-    clear()
+    clearCanv()
     stopTimer()
-    //init()
-    endGameEl.style.display = "flex"
+    highscoreUpdate()
+    onTheRun = false
+    init()
 }
+
+addEventListener("resize", stop)
 
 const countdown = () => {
     ctx.textAlign = "center"
@@ -135,15 +137,15 @@ const countdown = () => {
         ctx.fillText(3, canvas.width / 2, canvas.height / 2)
     }, 1000)
     setTimeout(function () {
-        clear()
+        clearCanv()
         ctx.fillText(2, canvas.width / 2, canvas.height / 2)
     }, 2000)
     setTimeout(function () {
-        clear()
+        clearCanv()
         ctx.fillText(1, canvas.width / 2, canvas.height / 2)
     }, 3000)
     setTimeout(function () {
-        clear()
+        clearCanv()
         startTimer()
         animate()
     }, 4000)
@@ -166,11 +168,14 @@ const stopTimer = () => {
     clearInterval(interval)
 }
 
+const highscoreUpdate = () => {
+    if (score > highscore) {
+        highscore = score
+        highscoreEl.innerHTML = score
+        resultEl.innerHTML = "Congratz! New record!"
+    } else resultEl.innerHTML = "Try again!"
+}
+
 startEl.addEventListener("click", () => {
-    endGameEl.style.display = "none"
     start()
 })
-let x = document.querySelector("#x")
-console.log(x)
-
-let endGameEl = document.querySelector("#endGame")

@@ -1,24 +1,32 @@
-<link rel="stylesheet" href="main.css" />
-<body onload="init()">
-    <div class="main-container">
-        <div class="timer-div">
-            <span>TIMER:</span>
-            <p id="timerEl"></p>
-        </div>
-        <div class="canv-div" id="x">
-            <canvas> </canvas>
-            <div id="endGame">
-                <h1 id="scoreEl">0</h1>
-                <p>Points</p>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Aim Practice</title>
+        <link rel="stylesheet" href="main.css" />
+    </head>
+    <body onload="init()">
+        <div class="mainContainer">
+            <div class="sideDiv">
+                <span>TIMER:</span>
+                <p id="timerEl"></p>
+            </div>
+            <div class="canvDiv" id="x">
+                <canvas> </canvas>
+                <div id="menuEl">
+                    <h1 id="scoreEl">0</h1>
+                    <p>Points</p>
+                    <p id="resultEl"></p>
+                    <button id="startBtn">START</button>
+                </div>
+            </div>
 
-                <button id="startBtn">START</button>
+            <div class="sideDiv">
+                <span>HIGHSCORE:</span>
+                <p id="highscoreEl">0</p>
             </div>
         </div>
-
-        <div class="menu-div" id="menu">
-            <span>SCORE:</span>
-            <p id="scoreEl"></p>
-        </div>
-    </div>
-</body>
-<script src="./app.js"></script>
+    </body>
+    <script src="./app.js"></script>
+</html>

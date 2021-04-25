@@ -1,32 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 body {
     margin: 0;
-    background-color: rgb(240, 220, 240);
+    background-color: rgb(77, 180, 132);
     font-family: "Poppins", sans-serif;
     font-size: xx-large;
     font-weight: bold;
     text-align: center;
 }
-.main-container {
+.mainContainer {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-.menu-div {
+.sideDiv {
     flex: 1;
     flex-basis: 15%;
     padding-top: 10%;
 }
-.canv-div {
-    flex: 1;
+.canvDiv {
     flex-basis: 25%;
-    background-color: brown;
+    background-color: rgb(42, 81, 165);
 }
-.timer-div {
-    flex: 1;
-    flex-basis: 15%;
-    padding-top: 10%;
-}
+
 #startBtn {
     background-color: #008cba;
     border: none;
@@ -42,7 +37,7 @@ body {
     cursor: pointer;
 }
 
-#endGame {
+#menuEl {
     position: absolute;
     min-width: 50%;
     min-height: 30%;
@@ -57,14 +52,16 @@ body {
     align-items: center;
 }
 
-#scoreEl,
+#highscoreEl,
 #timerEl {
-    font-size: 60;
+    font-size: 5em;
+}
+
+#scoreEl {
+    font-size: 3em;
 }
 
 canvas {
-    border-style: solid;
-    border-width: 1px;
     background-color: rgb(187, 187, 187);
     opacity: 70%;
 }
